@@ -44,8 +44,38 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       "resourceTypes": ["main_frame"]
     }
   };
+    const ruleId4 = 4; 
+  const rule4 = {
+    "id": 4,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+         "extensionPath": "/Shame.html"
+      }
+    },
+    "condition": {
+      "urlFilter": "chat.deepseek.com",
+      "resourceTypes": ["main_frame"]
+    }
+  };
+    const ruleId5 = 1; 
+  const rule5 = {
+    "id": 5,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+         "extensionPath": "/Shame.html"
+      }
+    },
+    "condition": {
+      "urlFilter": "grok.com",
+      "resourceTypes": ["main_frame"]
+    }
+  };
   if (msg.action === 'activateRule') {
-    chrome.declarativeNetRequest.updateDynamicRules({ addRules: [rule,rule2,rule3] });
+    chrome.declarativeNetRequest.updateDynamicRules({ addRules: [rule,rule2,rule3,rule4,rule5] });
    chrome.tabs.query({ url: "*://*.chatgpt.com/*" }, (tabs) => {
      tabs.forEach(tab => {
     chrome.tabs.update(tab.id, { url: chrome.runtime.getURL("Shame.html") });
@@ -62,10 +92,10 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   });
 });
     setTimeout(() => {
- chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: [ruleId,ruleId2,ruleId3] });
+ chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: [ruleId,ruleId2,ruleId3,ruleId4,ruleId5] });
 }, 3000);
   }
   else if (msg.action === 'deactivateRule') {
-    chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: [ruleId,ruleId2,ruleId3] });
+    chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: [ruleId,ruleId2,ruleId3,ruleId4,ruleId5] });
   }
 });
