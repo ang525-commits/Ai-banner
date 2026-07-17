@@ -91,9 +91,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     chrome.tabs.update(tab.id, { url: chrome.runtime.getURL("Shame.html") });
   });
 });
-    setTimeout(() => {
- chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: [ruleId,ruleId2,ruleId3,ruleId4,ruleId5] });
-}, 3000);
   }
   else if (msg.action === 'deactivateRule') {
     chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: [ruleId,ruleId2,ruleId3,ruleId4,ruleId5] });
